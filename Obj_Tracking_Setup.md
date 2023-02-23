@@ -1,4 +1,4 @@
-# SampleSolution
+# Object Detection SampleSolution
 
 This is a deployment of Nanodet's detection model, training on our own RC car and converted into an OpenVINO model. We integrate a RealSense2 camera into the demo for its ubiquitous compatibility amongstoperating systems and with Intel's OpenVINO. Realsense also has a depth camera, although it is not used in this demo.
 
