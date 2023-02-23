@@ -1,4 +1,4 @@
-# INSTALLING OPENVINO DEV TOOLS
+# Installing OpenVINO Development Tools
 
 ```shell
 sudo mkdir /opt/intel/
@@ -26,7 +26,7 @@ source /opt/intel/openvino_2021/bin/setupvars.sh
 OR
 vim ~/.bashrc AND ADD source /opt/intel/openvino_2021/bin/setupvars.sh AT THE END
 
-## INSTALLING ONNX
+## Installing ONNX
 
 ```shell
 python3 -m venv openvino_env (might need to sudo apt install python3.8-venv)
