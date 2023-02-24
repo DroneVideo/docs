@@ -6,7 +6,7 @@ This is a deployment of Nanodet's detection model, training on our own RC car an
 
 
 ```shell
-cd autodrone-openvino
+cd {$PATH_TO_object-tracking-2022}/autodrone-openvino
 mkdir build
 cd build
 cmake ..
