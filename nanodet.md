@@ -2,6 +2,7 @@
 
 # NanoDet-Plus
 Link to [Github Repo](https://github.com/RangiLyu/nanodet)
+    
 **Super fast and high accuracy lightweight anchor-free object detection model. Real-time on mobile devices.**
 
 </div>
