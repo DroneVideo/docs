@@ -12,13 +12,12 @@ Add the server to the list of repositories:
 sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 ```
 
-Install the libraries (see section below if upgrading packages):
+Install the libraries:
 
 ```shell
 sudo apt-get install librealsense2-dkms
 sudo apt-get install librealsense2-utils
 ```
-
 The above two lines will deploy librealsense2 udev rules, build and activate kernel modules, runtime library and executable demos and tools.
 
 Lastly, install the developer and debug packages:
