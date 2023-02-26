@@ -5,8 +5,10 @@ Our object detection model is converted from PyTorch to ONNX to OpenVINO. This i
 ## Converting a PyTorch model to OpenVINO
 
 0. If you haven't already:
+
     [Install OpenVINO](https://github.com/DroneVideo/docs/blob/gh-pages/openvino.md)
-    [Install pip requirements](https://github.com/DroneVideo/docs/blob/gh-pages/setup.md") (step 3)
+    
+    [Install pip requirements](https://github.com/DroneVideo/docs/blob/gh-pages/setup.md) (step 3)
 
 1. Export ONNX model
 
