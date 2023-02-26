@@ -1,9 +1,12 @@
-## Convert Model (already converted so no need to do this)
+# Intel OpenVINO
 
-0. Install pip requirements
-   ```shell
-   pip install -r requirements.txt
-   ```
+Our object detection model is converted from PyTorch to ONNX to OpenVINO. This is because OpenVINO accelerates the performance of machine learning models with advantages in many areas. OpenVINO integration allows inline conversion of input shape models, graph partitioning, support for INT8 models, and Docker Containers. Essentially, it provides us the model optimization necessary for our low power computer vision solution.
+
+## Converting a PyTorch model to OpenVINO
+
+0. If you haven't already:
+    [Install OpenVINO](https://github.com/DroneVideo/docs/blob/gh-pages/openvino.md)
+    [Install pip requirements](https://github.com/DroneVideo/docs/blob/gh-pages/setup.md") (step 3)
 
 1. Export ONNX model
 
