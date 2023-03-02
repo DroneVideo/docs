@@ -16,3 +16,26 @@ Getting the object detection and tracking demos to work on your computer as fair
     ```
 
 4.  Follow the README in that repository for instructions to build the deploy the model.
+
+## Demo with BYTETrack (not benchmarked)
+
+In addition to our object detection model with NanoDet, we produced an object tracking method combining NanoDet and BYTETrack. Given an initial frame containing the rover, NanoDet detects the rover and from there BYTETrack uses its region based tracking to compare frames and track the rover. We use ROS to publish the coordinates of rover and to access the RealSense camera.
+
+1. Install ROS and setup a catkin workspace
+    [ROS Noetic Installation](https://github.com/DroneVideo/docs/blob/gh-pages/ros.md)
+
+    ```shell
+    mkdir ~/catkin_ws/src
+    cd ~/catkin_ws/
+    catkin_make
+    ```
+
+    You now should have a build, devel, and src folder in catkin. Source devel.
+
+    ```shell
+    source devel/setup.bash
+    ```
+
+2. Clone the [bytetrack-demo-2023](https://github.com/DroneVideo/bytetrack-demo-2023) repository into ~/catkin_ws/src/
+
+3. Follow the instructions from the README found in that repo
