@@ -12,6 +12,8 @@ Our object detection model is converted from PyTorch to ONNX to OpenVINO. This i
 
 1. Export ONNX model
 
+The Python script for this action can be found [here](https://github.com/DroneVideo/object-tracking-2022)
+
    ```shell
    python ./export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
    ```

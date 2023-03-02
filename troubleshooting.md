@@ -7,7 +7,7 @@ sudo apt update
 sudo apt install libopencv-dev python3-opencv
 ```
 
-1. **No Inference Engine**
+2. **No Inference Engine**
 
 Source OpenVINO
 
@@ -15,7 +15,7 @@ Source OpenVINO
 source /opt/intel/openvino_2021/bin/setupvars.sh
 ```
 
-1. **No Realsense2 (For camera)**
+3. **No Realsense2 (For camera)**
 
 If you do not have a RealSense camera connected to your device (through USB), this is the best error you can get.
 
