@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Model Conversion Pipeline · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="bytetrack.html" />
+    <link rel="next" href="openvino.html" />
     
+    
+    <link rel="prev" href="rs2.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -152,7 +154,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="model_convert.html">
+        <li class="chapter active" data-level="1.6" data-path="model_convert.html">
             
                 <a href="model_convert.html">
             
@@ -234,7 +236,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Model Conversion Pipeline</a>
     </h1>
 </div>
 
@@ -249,9 +251,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1>
-<p>This project will create a research infrastructure for computer vision and real-time decision making using autonomous mobile robots (both aerial and ground). The infrastructure includes four integrated components: (1) A UAV laboratory set up as miniature cities (using Lego and Ever blocks). UAVs are unmanned aerial vehicles (also called unmanned aerial systems, UAS, or drones). (2) A simulator that reflects the physical laboratory. (3) Programmable autonomous aerial robots with the same programming interface as the simulator. (4) Sample solutions for efficient computer vision, vision-based control, and navigation as baselines for improvements and comparison. This infrastructure will be available to the research community in many ways: (1) Users can evaluate their solutions using the simulator first in a safe virtual environment. (2) This project will provide autonomous aerial robots to users so that they can conduct experiments in their own laboratories or on their campuses. (3) Users can upload their control programs and this team can launch the robots inside Purdue&apos;s UAV laboratory. Users can observe the behavior of these robots remotely using the high-speed cameras already deployed in the laboratory. (4) Users can bring their own autonomous robots to the laboratory and conduct experiments. (5) This project will create competitions for researchers to demonstrate their solutions using autonomous mobile robots in simulated emergency and rescue scenarios. The competitions will use miniature buildings and people for the aerial robots to recognize and count objects (such as number of people, vehicles, and houses), assess situations (such as the number of collapsed bridges), while avoiding obstacles made of Ever Blocks.</p>
-<p>Keywords: computer vision; autonomous mobile robots; real-time control and decision making</p>
+                                <h1 id="intel-openvino">Intel OpenVINO</h1>
+<p>Our object detection model is converted from PyTorch to ONNX to OpenVINO. This is because OpenVINO accelerates the performance of machine learning models with advantages in many areas. OpenVINO integration allows inline conversion of input shape models, graph partitioning, support for INT8 models, and Docker Containers. Essentially, it provides us the model optimization necessary for our low power computer vision solution.</p>
+<h2 id="converting-a-pytorch-model-to-openvino">Converting a PyTorch model to OpenVINO</h2>
+<ol>
+<li><p>If you haven&apos;t already:</p>
+<p> <a href="https://github.com/DroneVideo/docs/blob/gh-pages/openvino.md" target="_blank">Install OpenVINO</a></p>
+<p> <a href="https://github.com/DroneVideo/docs/blob/gh-pages/setup.md" target="_blank">Install pip requirements</a> (step 3)</p>
+</li>
+<li><p>Export ONNX model</p>
+</li>
+</ol>
+<p>The Python script for this action can be found <a href="https://github.com/DroneVideo/object-tracking-2022" target="_blank">here</a></p>
+<pre><code class="lang-shell">   python ./export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+</code></pre>
+<ol>
+<li><p>Use <em>onnx-simplifier</em> to simplify it</p>
+<pre><code class="lang-shell">python -m onnxsim ${INPUT_ONNX_MODEL} ${OUTPUT_ONNX_MODEL}
+</code></pre>
+</li>
+<li><p>Convert to OpenVINO</p>
+<pre><code class="lang-shell">cd &lt;INSTSLL_DIR&gt;/openvino_2021.4.752/deployment_tools/model_optimizer
+</code></pre>
+<p>Install requirements for convert tool</p>
+<pre><code class="lang-shell">sudo ./install_prerequisites/install_prerequisites_onnx.sh
+</code></pre>
+<p>Then convert model. Notice: mean_values and scale_values should be the same with your training settings in YAML config file.</p>
+<pre><code class="lang-shell">python3 mo_onnx.py --input_model &lt;ONNX_MODEL&gt; --mean_values [103.53,116.28,123.675] --scale_values [57.375,57.12,58.395]
+</code></pre>
+</li>
+</ol>
 
                                 
                                 </section>
@@ -279,8 +308,12 @@
 
             
                 
+                <a href="rs2.html" class="navigation navigation-prev " aria-label="Previous page: Intel RealSense 2">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="bytetrack.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ByteTrack">
+                
+                <a href="openvino.html" class="navigation navigation-next " aria-label="Next page: OpenVino">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -291,7 +324,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"ByteTrack","level":"1.2","depth":1,"path":"bytetrack.md","ref":"bytetrack.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2023-03-21T04:14:19.953Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Model Conversion Pipeline","level":"1.6","depth":1,"next":{"title":"OpenVino","level":"1.7","depth":1,"path":"openvino.md","ref":"openvino.md","articles":[]},"previous":{"title":"Intel RealSense 2","level":"1.5","depth":1,"path":"rs2.md","ref":"rs2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"model_convert.md","mtime":"2023-03-21T04:00:09.980Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

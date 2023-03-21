@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>OpenVino · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="bytetrack.html" />
+    <link rel="next" href="setup.html" />
     
+    
+    <link rel="prev" href="model_convert.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -165,7 +167,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="openvino.html">
+        <li class="chapter active" data-level="1.7" data-path="openvino.html">
             
                 <a href="openvino.html">
             
@@ -234,7 +236,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >OpenVino</a>
     </h1>
 </div>
 
@@ -249,9 +251,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1>
-<p>This project will create a research infrastructure for computer vision and real-time decision making using autonomous mobile robots (both aerial and ground). The infrastructure includes four integrated components: (1) A UAV laboratory set up as miniature cities (using Lego and Ever blocks). UAVs are unmanned aerial vehicles (also called unmanned aerial systems, UAS, or drones). (2) A simulator that reflects the physical laboratory. (3) Programmable autonomous aerial robots with the same programming interface as the simulator. (4) Sample solutions for efficient computer vision, vision-based control, and navigation as baselines for improvements and comparison. This infrastructure will be available to the research community in many ways: (1) Users can evaluate their solutions using the simulator first in a safe virtual environment. (2) This project will provide autonomous aerial robots to users so that they can conduct experiments in their own laboratories or on their campuses. (3) Users can upload their control programs and this team can launch the robots inside Purdue&apos;s UAV laboratory. Users can observe the behavior of these robots remotely using the high-speed cameras already deployed in the laboratory. (4) Users can bring their own autonomous robots to the laboratory and conduct experiments. (5) This project will create competitions for researchers to demonstrate their solutions using autonomous mobile robots in simulated emergency and rescue scenarios. The competitions will use miniature buildings and people for the aerial robots to recognize and count objects (such as number of people, vehicles, and houses), assess situations (such as the number of collapsed bridges), while avoiding obstacles made of Ever Blocks.</p>
-<p>Keywords: computer vision; autonomous mobile robots; real-time control and decision making</p>
+                                <h1 id="installing-openvino-development-tools">Installing OpenVINO Development Tools</h1>
+<p>Create a directory for OpenVINO</p>
+<pre><code class="lang-shell">sudo mkdir /opt/intel/
+</code></pre>
+<p>Download the file at this link:
+<a href="https://storage.openvinotoolkit.org/repositories/openvino/packages/2021.4.2/l_openvino_toolkit_dev_ubuntu20_p_2021.4.752.tgz" target="_blank">OpenVINO 2021 for Ubuntu</a></p>
+<pre><code class="lang-shell">cd ~/Downloads/
+
+tar -xf l_openvino_toolkit_dev_ubuntu20_p_2021.4.752.tgz
+
+sudo mv l_openvino_toolkit_dev_ubuntu20_p_2021.4.752 /opt/intel/openvino_2021.4.752
+
+cd /opt/intel/
+
+sudo ln -s openvino_2021.4.752 openvino_2021
+</code></pre>
+<p>Run this command every time you set up a terminal window to use OpenVINO</p>
+<pre><code class="lang-shell">source /opt/intel/openvino_2021/bin/setupvars.sh
+</code></pre>
+<p><em>OR</em>
+Do this once</p>
+<pre><code class="lang-shell">echo source /opt/intel/openvino_2021/bin/setupvars.sh &gt;&gt; ~/.bashrc
+</code></pre>
+<h2 id="installing-onnx">Installing ONNX</h2>
+<pre><code class="lang-shell">python3 -m venv openvino_env #(might need to sudo apt install python3.8-venv)
+
+source openvino_env/bin/activate
+
+python -m pip install --upgrade pip
+
+pip install openvino-dev[ONNX]==2021.4.2
+</code></pre>
+<p>Test installation</p>
+<pre><code class="lang-shell">mo -h
+</code></pre>
 
                                 
                                 </section>
@@ -279,8 +313,12 @@
 
             
                 
+                <a href="model_convert.html" class="navigation navigation-prev " aria-label="Previous page: Model Conversion Pipeline">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="bytetrack.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ByteTrack">
+                
+                <a href="setup.html" class="navigation navigation-next " aria-label="Next page: Setup">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -291,7 +329,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"ByteTrack","level":"1.2","depth":1,"path":"bytetrack.md","ref":"bytetrack.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2023-03-21T04:14:19.953Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OpenVino","level":"1.7","depth":1,"next":{"title":"Setup","level":"1.8","depth":1,"path":"setup.md","ref":"setup.md","articles":[]},"previous":{"title":"Model Conversion Pipeline","level":"1.6","depth":1,"path":"model_convert.md","ref":"model_convert.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"openvino.md","mtime":"2023-03-21T04:00:09.980Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

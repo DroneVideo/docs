@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Setup · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="bytetrack.html" />
+    <link rel="next" href="troubleshooting.html" />
     
+    
+    <link rel="prev" href="openvino.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -178,7 +180,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="setup.html">
+        <li class="chapter active" data-level="1.8" data-path="setup.html">
             
                 <a href="setup.html">
             
@@ -234,7 +236,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Setup</a>
     </h1>
 </div>
 
@@ -249,9 +251,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1>
-<p>This project will create a research infrastructure for computer vision and real-time decision making using autonomous mobile robots (both aerial and ground). The infrastructure includes four integrated components: (1) A UAV laboratory set up as miniature cities (using Lego and Ever blocks). UAVs are unmanned aerial vehicles (also called unmanned aerial systems, UAS, or drones). (2) A simulator that reflects the physical laboratory. (3) Programmable autonomous aerial robots with the same programming interface as the simulator. (4) Sample solutions for efficient computer vision, vision-based control, and navigation as baselines for improvements and comparison. This infrastructure will be available to the research community in many ways: (1) Users can evaluate their solutions using the simulator first in a safe virtual environment. (2) This project will provide autonomous aerial robots to users so that they can conduct experiments in their own laboratories or on their campuses. (3) Users can upload their control programs and this team can launch the robots inside Purdue&apos;s UAV laboratory. Users can observe the behavior of these robots remotely using the high-speed cameras already deployed in the laboratory. (4) Users can bring their own autonomous robots to the laboratory and conduct experiments. (5) This project will create competitions for researchers to demonstrate their solutions using autonomous mobile robots in simulated emergency and rescue scenarios. The competitions will use miniature buildings and people for the aerial robots to recognize and count objects (such as number of people, vehicles, and houses), assess situations (such as the number of collapsed bridges), while avoiding obstacles made of Ever Blocks.</p>
-<p>Keywords: computer vision; autonomous mobile robots; real-time control and decision making</p>
+                                <h1 id="setting-up-our-samplesolution">Setting up our SampleSolution</h1>
+<p>Getting the object detection and tracking demos to work on your computer as fairly simply; however, installing dependencies can be time-consuming. Note that our solution is built for our onboard computer running Linux Ubuntu 20.04, so the following instructions are written for that distribution.</p>
+<ol>
+<li><p>The first step is installing OpenVINO
+<a href="https://github.com/DroneVideo/docs/blob/gh-pages/openvino.md" target="_blank">OpenVINO Installation Tutorial</a></p>
+</li>
+<li><p>RealSense libraries and packages are needed to access your RealSense2 camera
+<a href="https://github.com/DroneVideo/docs/blob/gh-pages/rs2.md" target="_blank">RealSense for Linux distribution</a></p>
+</li>
+<li><p>Lastly, clone the <a href="https://github.com/DroneVideo/object-tracking-2022" target="_blank">object-tracking-2022</a> 
+repository and install the pip packages in the requirements.txt to create an environment that can build the SampleSolution.</p>
+<pre><code class="lang-shell">pip install -r requirements.txt
+</code></pre>
+</li>
+<li><p>Follow the README in that repository for instructions to build the deploy the model.</p>
+</li>
+</ol>
+<h2 id="demo-with-bytetrack-not-benchmarked">Demo with BYTETrack (not benchmarked)</h2>
+<p>In addition to our object detection model with NanoDet, we produced an object tracking method combining NanoDet and BYTETrack. Given an initial frame containing the rover, NanoDet detects the rover and from there BYTETrack uses its region based tracking to compare frames and track the rover. We use ROS to publish the coordinates of rover and to access the RealSense camera.</p>
+<ol>
+<li><p>Install ROS and setup a catkin workspace
+ <a href="https://github.com/DroneVideo/docs/blob/gh-pages/ros.md" target="_blank">ROS Noetic Installation</a></p>
+<pre><code class="lang-shell"> mkdir ~/catkin_ws/src
+ cd ~/catkin_ws/
+ catkin_make
+</code></pre>
+<p> You now should have a build, devel, and src folder in catkin. Source devel.</p>
+<pre><code class="lang-shell"> source devel/setup.bash
+</code></pre>
+</li>
+<li><p>Clone the <a href="https://github.com/DroneVideo/bytetrack-demo-2023" target="_blank">bytetrack-demo-2023</a> repository into ~/catkin_ws/src/</p>
+</li>
+<li><p>Follow the instructions from the README found in that repo</p>
+</li>
+</ol>
 
                                 
                                 </section>
@@ -279,8 +313,12 @@
 
             
                 
+                <a href="openvino.html" class="navigation navigation-prev " aria-label="Previous page: OpenVino">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="bytetrack.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ByteTrack">
+                
+                <a href="troubleshooting.html" class="navigation navigation-next " aria-label="Next page: Troubleshotting">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -291,7 +329,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"ByteTrack","level":"1.2","depth":1,"path":"bytetrack.md","ref":"bytetrack.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2023-03-21T04:14:19.953Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setup","level":"1.8","depth":1,"next":{"title":"Troubleshotting","level":"1.9","depth":1,"path":"troubleshooting.md","ref":"troubleshooting.md","articles":[]},"previous":{"title":"OpenVino","level":"1.7","depth":1,"path":"openvino.md","ref":"openvino.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"setup.md","mtime":"2023-03-21T04:00:09.980Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-21T04:14:49.763Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
