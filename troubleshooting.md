@@ -25,4 +25,11 @@
 
 4. **No Eigen/Eigen3**
 
-    Solution to be posted
+    Typically, this is a result of Eigen being placed in the wrong directory of your computer.
+    
+    Try:
+    ```shell
+    sudo cp -r /usr/include/eigen3 /usr/local/include/
+    ```
+    
+    Or use "sudo find" and copy the directory to the one above.
